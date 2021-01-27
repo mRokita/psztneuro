@@ -5,13 +5,51 @@ description = ""
 authors = ["Michał Rokita <mrokita@mrokita.pl>"]
 
 [tool.poetry.dependencies]
-python = "^3.9.1"
+python = "^3.8.0"
 tqdm = "^4.56.0"
 sklearn = "^0.0"
 numpy = "^1.19.5"
 typer = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.2.2"
+isort = "^5.6.4"
+flakehell = "^0.9.0"
+flake8-markdown = "^0.2.0"
+pylint = "^2.6.0"
+pycodestyle = "^2.6.0"
+mccabe = "^0.6.1"
+yapf = { extras = ["all"], version = "^0.30.0" }
+ptpython = "^3.0.7"
+
+[tool.flakehell]
+show_source = false
+max_line_length = 90
+format = "colored"
+
+[tool.flakehell.plugins]
+
+"pyflakes" = ["+*"]
+"mccabe" = ["+*"]
+"flake8-bandit" = ["+*"]
+"pycodestyle" = ["+*", "-W503", "-W504"]
+"pylint" = ["+*", "-C*", "-R0903", "-E0611", "-R0902", "-R0913", "-R0914"]
+"flake8-markdown" = ["+*"]
+
+[tool.flakehell.exceptions."tests/*.py"]
+
+"flake8-bandit" = ["-S101"]
+"pylint" = ["-W0621", "-W0613"]
+
+[tool.isort]
+line_length = 90
+multi_line_output = 3
+force_single_line = false
+balanced_wrapping = true
+default_section = "THIRDPARTY"
+known_first_party = "konw_api"
+include_trailing_comma = true
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
